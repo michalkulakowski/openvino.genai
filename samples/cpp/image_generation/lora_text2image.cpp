@@ -4,6 +4,7 @@
 #include "openvino/genai/image_generation/text2image_pipeline.hpp"
 
 #include "imwrite.hpp"
+#include "progress_bar.hpp"
 
 int32_t main(int32_t argc, char* argv[]) try {
     OPENVINO_ASSERT(argc >= 3 && (argc - 3) % 2 == 0, "Usage: ", argv[0], " <MODEL_DIR> '<PROMPT>' [<LORA_SAFETENSORS> <ALPHA> ...]]");
@@ -24,19 +25,21 @@ int32_t main(int32_t argc, char* argv[]) try {
 
     std::cout << "Generating image with LoRA adapters applied, resulting image will be in lora.bmp\n";
     ov::Tensor image = pipe.generate(prompt,
-        ov::genai::generator(std::make_shared<ov::genai::CppStdGenerator>(42)),
         ov::genai::width(512),
         ov::genai::height(896),
-        ov::genai::num_inference_steps(20));
+        ov::genai::num_inference_steps(20),
+        ov::genai::rng_seed(42),
+        ov::genai::callback(progress_bar));
     imwrite("lora.bmp", image, true);
 
     std::cout << "Generating image without LoRA adapters applied, resulting image will be in baseline.bmp\n";
     image = pipe.generate(prompt,
         ov::genai::adapters(),  // passing adapters in generate overrides adapters set in the constructor; adapters() means no adapters
-        ov::genai::generator(std::make_shared<ov::genai::CppStdGenerator>(42)),
         ov::genai::width(512),
         ov::genai::height(896),
-        ov::genai::num_inference_steps(20));
+        ov::genai::num_inference_steps(20),
+        ov::genai::rng_seed(42),
+        ov::genai::callback(progress_bar));
     imwrite("baseline.bmp", image, true);
 
     return EXIT_SUCCESS;

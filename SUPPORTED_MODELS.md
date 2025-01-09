@@ -14,7 +14,6 @@
       <td>ChatGLM</td>
       <td>
         <ul>
-          <li><a href="https://huggingface.co/THUDM/chatglm2-6b"><code>THUDM/chatglm2-6b</code></a></li>
           <li><a href="https://huggingface.co/THUDM/chatglm3-6b"><code>THUDM/chatglm3-6b</code></a></li>
         </ul>
       </td>
@@ -147,6 +146,8 @@
   </tbody>
 </table>
 
+> [!NOTE]
+> LoRA adapters are supported.
 
 The pipeline can work with other similar topologies produced by `optimum-intel` with the same model signature. The model is required to have the following inputs after the conversion:
 1. `input_ids` contains the tokens.
@@ -165,10 +166,12 @@ The pipeline can work with other similar topologies produced by `optimum-intel` 
       <th>Architecture</th>
       <th>Text 2 image</th>
       <th>Image 2 image</th>
+      <th>LoRA support</th>
       <th>Example HuggingFace Models</th>
     </tr>
     <tr>
       <td><code>Latent Consistency Model</code></td>
+      <td>Supported</td>
       <td>Supported</td>
       <td>Supported</td>
       <td>
@@ -181,12 +184,32 @@ The pipeline can work with other similar topologies produced by `optimum-intel` 
       <td><code>Stable Diffusion</code></td>
       <td>Supported</td>
       <td>Supported</td>
+      <td>Supported</td>
       <td>
         <ul>
+          <li><a href="https://huggingface.co/CompVis/stable-diffusion-v1-1"><code>CompVis/stable-diffusion-v1-1</code></a></li>
+          <li><a href="https://huggingface.co/CompVis/stable-diffusion-v1-2"><code>CompVis/stable-diffusion-v1-2</code></a></li>
+          <li><a href="https://huggingface.co/CompVis/stable-diffusion-v1-3"><code>CompVis/stable-diffusion-v1-3</code></a></li>
+          <li><a href="https://huggingface.co/CompVis/stable-diffusion-v1-4"><code>CompVis/stable-diffusion-v1-4</code></a></li>
+          <li><a href="https://huggingface.co/junnyu/stable-diffusion-v1-4-paddle"><code>junnyu/stable-diffusion-v1-4-paddle</code></a></li>
+          <li><a href="https://huggingface.co/jcplus/stable-diffusion-v1-5"><code>jcplus/stable-diffusion-v1-5</code></a></li>
+          <li><a href="https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5"><code>stable-diffusion-v1-5/stable-diffusion-v1-5</code></a></li>
           <li><a href="https://huggingface.co/botp/stable-diffusion-v1-5"><code>botp/stable-diffusion-v1-5</code></a></li>
           <li><a href="https://huggingface.co/dreamlike-art/dreamlike-anime-1.0"><code>dreamlike-art/dreamlike-anime-1.0</code></a></li>
           <li><a href="https://huggingface.co/stabilityai/stable-diffusion-2"><code>stabilityai/stable-diffusion-2</code></a></li>
+          <li><a href="https://huggingface.co/stabilityai/stable-diffusion-2-base"><code>stabilityai/stable-diffusion-2-base</code></a></li>
           <li><a href="https://huggingface.co/stabilityai/stable-diffusion-2-1"><code>stabilityai/stable-diffusion-2-1</code></a></li>
+          <li><a href="https://huggingface.co/bguisard/stable-diffusion-nano-2-1"><code>bguisard/stable-diffusion-nano-2-1</code></a></li>
+          <li><a href="https://huggingface.co/justinpinkney/pokemon-stable-diffusion"><code>justinpinkney/pokemon-stable-diffusion</code></a></li>
+          <li><a href="https://huggingface.co/stablediffusionapi/architecture-tuned-model"><code>stablediffusionapi/architecture-tuned-model</code></a></li>
+          <li><a href="https://huggingface.co/IDEA-CCNL/Taiyi-Stable-Diffusion-1B-Chinese-EN-v0.1"><code>IDEA-CCNL/Taiyi-Stable-Diffusion-1B-Chinese-EN-v0.1</code></a></li>
+          <li><a href="https://huggingface.co/ZeroCool94/stable-diffusion-v1-5"><code>ZeroCool94/stable-diffusion-v1-5</code></a></li>
+          <li><a href="https://huggingface.co/pcuenq/stable-diffusion-v1-4"><code>pcuenq/stable-diffusion-v1-4</code></a></li>
+          <li><a href="https://huggingface.co/rinna/japanese-stable-diffusion"><code>rinna/japanese-stable-diffusion</code></a></li>
+          <li><a href="https://huggingface.co/benjamin-paine/stable-diffusion-v1-5"><code>benjamin-paine/stable-diffusion-v1-5</code></a></li>
+          <li><a href="https://huggingface.co/philschmid/stable-diffusion-v1-4-endpoints"><code>philschmid/stable-diffusion-v1-4-endpoints</code></a></li>
+          <li><a href="https://huggingface.co/naclbit/trinart_stable_diffusion_v2"><code>naclbit/trinart_stable_diffusion_v2</code></a></li>
+          <li><a href="https://huggingface.co/Fictiverse/Stable_Diffusion_PaperCut_Model"><code>Fictiverse/Stable_Diffusion_PaperCut_Model</code></a></li>
         </ul>
       </td>
     </tr>
@@ -194,16 +217,19 @@ The pipeline can work with other similar topologies produced by `optimum-intel` 
       <td><code>Stable Diffusion XL</code></td>
       <td>Supported</td>
       <td>Supported</td>
+      <td>Supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/stabilityai/stable-diffusion-xl-base-0.9"><code>stabilityai/stable-diffusion-xl-base-0.9</code></a></li>
           <li><a href="https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0"><code>stabilityai/stable-diffusion-xl-base-1.0</code></a></li>
+          <li><a href="https://huggingface.co/stabilityai/sdxl-turbo"><code>stabilityai/sdxl-turbo</code></a></li>
         </ul>
       </td>
     </tr>
     <tr>
       <td><code>Stable Diffusion 3</code></td>
       <td>Supported</td>
+      <td>Not supported</td>
       <td>Not supported</td>
       <td>
         <ul>
@@ -217,12 +243,15 @@ The pipeline can work with other similar topologies produced by `optimum-intel` 
       <td><code>Flux</code></td>
       <td>Supported</td>
       <td>Not supported</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/black-forest-labs/FLUX.1-schnell"><code>black-forest-labs/FLUX.1-schnell</code></a></li>
           <li><a href="https://huggingface.co/Freepik/flux.1-lite-8B-alpha"><code>Freepik/flux.1-lite-8B-alpha</code></a></li>
           <li><a href="https://huggingface.co/black-forest-labs/FLUX.1-dev"><code>black-forest-labs/FLUX.1-dev</code></a></li>
           <li><a href="https://huggingface.co/shuttleai/shuttle-3-diffusion"><code>shuttleai/shuttle-3-diffusion</code></a></li>
+          <li><a href="https://huggingface.co/shuttleai/shuttle-3.1-aesthetic"><code>shuttleai/shuttle-3.1-aesthetic</code></a></li>
+          <li><a href="https://huggingface.co/Shakker-Labs/AWPortrait-FL"><code>Shakker-Labs/AWPortrait-FL</code></a></li>
         </ul>
       </td>
     </tr>
@@ -238,10 +267,12 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
   <tbody style="vertical-align: top;">
     <tr>
       <th>Architecture</th>
+      <th>LoRA support</th>
       <th>Example HuggingFace Models</th>
     </tr>
     <tr>
       <td><code>Stable Diffusion</code></td>
+      <td>Supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/stabilityai/stable-diffusion-2-inpainting"><code>stabilityai/stable-diffusion-2-inpainting</code></a></li>
@@ -253,13 +284,22 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     </tr>
     <tr>
       <td><code>Stable Diffusion XL</code></td>
+      <td>Supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/diffusers/stable-diffusion-xl-1.0-inpainting-0.1"><code>diffusers/stable-diffusion-xl-1.0-inpainting-0.1</code></a></li>
         </ul>
       </td>
     </tr>
-    </tr>
+    <!-- <tr>
+      <td><code>FLUX</code></td>
+      <td>Not supported</td>
+      <td>
+        <ul>
+          <li><a href="https://huggingface.co/black-forest-labs/FLUX.1-Fill-dev"><code>black-forest-labs/FLUX.1-Fill-dev</code></a></li>
+        </ul>
+      </td>
+    </tr> -->
   </tbody>
 </table>
 
@@ -270,11 +310,13 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     <tr>
       <th>Architecture</th>
       <th>Models</th>
+      <th>LoRA support</th>
       <th>Example HuggingFace Models</th>
     </tr>
     <tr>
       <td><code>InternVL2</code></td>
       <td>InternVL2</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/OpenGVLab/InternVL2-1B"><code>OpenGVLab/InternVL2-1B</code></a></li>
@@ -287,6 +329,7 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     <tr>
       <td><code>LLaVA</code></td>
       <td>LLaVA-v1.5</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/llava-hf/llava-1.5-7b-hf"><code>llava-hf/llava-1.5-7b-hf</code></a></li>
@@ -296,6 +339,7 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     <tr>
       <td><code>LLaVA-NeXT</code></td>
       <td>LLaVa-v1.6</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/llava-hf/llava-v1.6-mistral-7b-hf"><code>llava-hf/llava-v1.6-mistral-7b-hf</code></a></li>
@@ -307,6 +351,7 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     <tr>
       <td><code>MiniCPMV</code></td>
       <td>MiniCPM-V-2_6</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/openbmb/MiniCPM-V-2_6"><code>openbmb/MiniCPM-V-2_6</code></a></li>
@@ -323,11 +368,13 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     <tr>
       <th>Architecture</th>
       <th>Models</th>
+      <th>LoRA support</th>
       <th>Example HuggingFace Models</th>
     </tr>
     <tr>
       <td rowspan=2><code>WhisperForConditionalGeneration</code></td>
       <td>Whisper</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/openai/whisper-tiny"><code>openai/whisper-tiny</code></a></li>
@@ -344,6 +391,7 @@ In addition to image generation models, `InpaintingPipeline` supports specialize
     </tr>
     <tr>
       <td>Distil-Whisper</td>
+      <td>Not supported</td>
       <td>
         <ul>
           <li><a href="https://huggingface.co/distil-whisper/distil-small.en"><code>distil-whisper/distil-small.en</code></a></li>

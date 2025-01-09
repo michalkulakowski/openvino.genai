@@ -6,6 +6,7 @@
 #include <filesystem>
 
 #include "openvino/genai/image_generation/inpainting_pipeline.hpp"
+#include "openvino/genai/image_generation/image2image_pipeline.hpp"
 
 #include "image_generation/stable_diffusion_pipeline.hpp"
 #include "image_generation/stable_diffusion_xl_pipeline.hpp"
@@ -25,7 +26,7 @@ InpaintingPipeline::InpaintingPipeline(const std::filesystem::path& root_dir) {
     } else if (class_name == "StableDiffusionXLPipeline" || class_name == "StableDiffusionXLInpaintPipeline") {
         m_impl = std::make_shared<StableDiffusionXLPipeline>(PipelineType::INPAINTING, root_dir);
     } else {
-        OPENVINO_THROW("Unsupported text to image generation pipeline '", class_name, "'");
+        OPENVINO_THROW("Unsupported inpainting pipeline '", class_name, "'");
     }
 }
 
@@ -39,7 +40,17 @@ InpaintingPipeline::InpaintingPipeline(const std::filesystem::path& root_dir, co
     } else if (class_name == "StableDiffusionXLPipeline" || class_name == "StableDiffusionXLInpaintPipeline") {
         m_impl = std::make_shared<StableDiffusionXLPipeline>(PipelineType::INPAINTING, root_dir, device, properties);
     } else {
-        OPENVINO_THROW("Unsupported text to image generation pipeline '", class_name, "'");
+        OPENVINO_THROW("Unsupported inpainting pipeline '", class_name, "'");
+    }
+}
+
+InpaintingPipeline::InpaintingPipeline(const Image2ImagePipeline& pipe) {
+    if (auto stable_diffusion_xl = std::dynamic_pointer_cast<StableDiffusionXLPipeline>(pipe.m_impl); stable_diffusion_xl != nullptr) {
+        m_impl = std::make_shared<StableDiffusionXLPipeline>(PipelineType::INPAINTING, *stable_diffusion_xl);
+    } else if (auto stable_diffusion = std::dynamic_pointer_cast<StableDiffusionPipeline>(pipe.m_impl); stable_diffusion != nullptr) {
+        m_impl = std::make_shared<StableDiffusionPipeline>(PipelineType::INPAINTING, *stable_diffusion);
+    } else {
+        OPENVINO_ASSERT("Cannot convert specified Image2ImagePipeline to InpaintingPipeline");
     }
 }
 
@@ -53,7 +64,7 @@ InpaintingPipeline InpaintingPipeline::stable_diffusion(
     const CLIPTextModel& clip_text_model,
     const UNet2DConditionModel& unet,
     const AutoencoderKL& vae) {
-    auto impl = std::make_shared<StableDiffusionPipeline>(PipelineType::IMAGE_2_IMAGE, clip_text_model, unet, vae);
+    auto impl = std::make_shared<StableDiffusionPipeline>(PipelineType::INPAINTING, clip_text_model, unet, vae);
 
     assert(scheduler != nullptr);
     impl->set_scheduler(scheduler);
@@ -66,7 +77,7 @@ InpaintingPipeline InpaintingPipeline::latent_consistency_model(
     const CLIPTextModel& clip_text_model,
     const UNet2DConditionModel& unet,
     const AutoencoderKL& vae) {
-    auto impl = std::make_shared<StableDiffusionPipeline>(PipelineType::IMAGE_2_IMAGE, clip_text_model, unet, vae);
+    auto impl = std::make_shared<StableDiffusionPipeline>(PipelineType::INPAINTING, clip_text_model, unet, vae);
 
     assert(scheduler != nullptr);
     impl->set_scheduler(scheduler);
@@ -80,7 +91,7 @@ InpaintingPipeline InpaintingPipeline::stable_diffusion_xl(
     const CLIPTextModelWithProjection& clip_text_model_with_projection,
     const UNet2DConditionModel& unet,
     const AutoencoderKL& vae) {
-    auto impl = std::make_shared<StableDiffusionXLPipeline>(PipelineType::IMAGE_2_IMAGE, clip_text_model, clip_text_model_with_projection, unet, vae);
+    auto impl = std::make_shared<StableDiffusionXLPipeline>(PipelineType::INPAINTING, clip_text_model, clip_text_model_with_projection, unet, vae);
 
     assert(scheduler != nullptr);
     impl->set_scheduler(scheduler);
