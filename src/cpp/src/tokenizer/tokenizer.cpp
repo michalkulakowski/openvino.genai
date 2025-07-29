@@ -217,7 +217,7 @@ public:
         ov::genai::utils::read_anymap_param(params, add_special_tokens.name(), add_special_tokens_flag);
         ov::genai::utils::read_anymap_param(params, skip_special_tokens.name(), skip_special_tokens_flag);
         ov::genai::utils::read_anymap_param(params, pad_to_max_length.name(), pad_to_max_length_val);
-        ov::genai::utils::read_anymap_param(params, max_length.name(), max_length_val);
+        // ov::genai::utils::read_anymap_param(params, max_length.name(), max_length_val);
         std::optional<bool> is_max_length_set_val = max_length_val.has_value();
 
         ov::AnyMap& state_flags = m_request_to_state_flags[&infer_request_guard.get()];
